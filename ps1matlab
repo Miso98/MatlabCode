@@ -1,0 +1,104 @@
+%%problem 7: visualization of the sum of two dice rolled via histogram
+clear all
+close all
+clc;
+
+trials = 10000;
+die_1 = unidrnd(6,1,trials);
+die_2 = unidrnd(6,1,trials);
+sum = die_1 + die 2;
+
+hist(sum,100);
+xlabel('sum');
+ylabel('frequency');
+title('histogram of 2 die tossed')
+
+%%problem 8
+clear all
+close all 
+clc;
+
+%variable initialization 
+trials  = 10000;
+max_throws = 24;
+rolls_double = 0;
+rolls = 0;
+
+%this simulates throwing two dice 24 times in 10000 trials
+for i = 1:1:trials
+  die_1 = unidrnd(6,1,max_throws);
+  die_2 = unidrnd(6,1,max_throws);
+  sum = die_1 + die_2;
+  %throwing a double six means the dice will have a sum of 12;
+  for j = 1:1:max throws
+    if sum(j) == 12;
+      rolls_double = rolls_double + 1;
+      break % for at least one roll we can break the loop after one double  6
+    end
+    rolls_double;
+   end
+ end
+ prob_double = rolls_double/trials;
+ 
+ %single die toss
+ for x = 1:1:trials
+  die_3 = unidrnd(6,1,max_throws);
+  for z = 1:1:4
+    if die_3(z) == 6;
+      rolls = rolls + 1;
+      break
+    end
+    rolls;
+   end
+ end
+ 
+ prob_single = rolls/trials
+ 
+ clear all
+ close all
+ clc;
+ 
+ trials = 1e6;
+ wins = 0;
+ 
+ for i = 1:1:trials
+  die_1 = unidrnd(6,1,trials);
+  die_2 = unidrnd(6,1,trials);
+  sum = die_1 + die_2;
+  if sum == 7 || sum == 11
+    wins = wins + 1;
+  elseif sum == 2 || sum == 3 || sum == 12
+  else 
+    while (sum ~=7)
+      die_1_rollnext = unidrnd(6,1,1);
+      die_2_rollnext = unidrnd(6,1,1);
+      sum_next = die_1_rollnext + die_2_rollnext;
+      if sum_next == sum
+        wins = wins + 1;
+        break
+      elseif sum_next == 7
+        break
+      end
+    end
+  end
+end
+probability = wins/trials
+
+clear all
+close all
+clc;
+
+trials = 1000;
+
+%starting with a circle of radius 1 
+x = unifrnd(-1,1,1 trials);
+y = unifrnd(-1,1,1,trials);
+%find the distance from the center of the circle which is at (0,0)
+distance = sqrt(x.^2 + y.^2);
+% want to eliminate values that are greater than 1 for the circle 
+elim = find(dsitance>1);
+%this deletes the values from the distance array that is more than 1
+distance(elim) = [];
+% inside the desired area will be within half of the radius away
+inside = sum(distance < .5);
+probability = inside /(trials-length(elim))
