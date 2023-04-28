@@ -1,0 +1,22 @@
+L = .05;
+to = 0;
+tf = 100;
+h = .5;
+w = 2;
+Eo = 3;
+R = 10;
+Io = 6;
+
+[t,I] = euler (Io, L, R, Eo, w, h, tf, to);
+plot(t,I);
+
+function [t,I] = euler(Io, L, R, Eo, w, h, tf, to)
+I(1) = Io;
+t(1) = to;
+n = 1;
+    while t(n) < tf
+    t(n+1) = t(n) + h;
+    I(n+1) = I(n) + h*(Eo/L - R.*I./L);
+    n = n+1;
+    end
+end
